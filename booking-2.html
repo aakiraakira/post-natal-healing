@@ -747,8 +747,12 @@
                 body: JSON.stringify(payload)
             }).catch(err => console.error(err));
 
-            // IMMEDIATELY open WhatsApp app
-            window.location.href = waUrl;
+            // IMMEDIATELY open WhatsApp app via simulated user tap to reduce OS friction
+            const waNativeLink = document.createElement('a');
+            waNativeLink.href = "https://api.whatsapp.com/send?phone=6585224547&text=" + encodeURIComponent(waMsg);
+            document.body.appendChild(waNativeLink);
+            waNativeLink.click();
+            document.body.removeChild(waNativeLink);
             
             // Clean up the form UI while the page redirects
             setStatus('success', 'Opening WhatsApp...');
