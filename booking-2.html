@@ -690,7 +690,8 @@
 
 
             const waMsg = buildWhatsAppMessage(data);
-            const waUrl = "https://wa.me/6585224547?text=" + encodeURIComponent(waMsg);
+            // Deep link forces the native app to open directly without browser prompts
+            const waUrl = "whatsapp://send?phone=6585224547&text=" + encodeURIComponent(waMsg);
 
             submitBtn.disabled = true;
             submitBtn.classList.add('opacity-70', 'cursor-not-allowed');
